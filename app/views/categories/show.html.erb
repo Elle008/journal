@@ -1,0 +1,17 @@
+<div class="container">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Category name:</strong>
+    <%= @category.category_name %>
+    id# <%= @category.id %>
+  </p>
+
+</div>
+
+    <%= link_to 'Edit this category', edit_category_path(@category), class: "btn btn-primary" %>
+    </br>
+    </br>
+    <%= button_to 'Destroy this category', category_path(@category), method: :delete, class: "btn btn-secondary" %>
+    </br>
+    <%= link_to 'Back to categories', categories_path, class: "btn-btn-link" %>
+  </div>
+</div>

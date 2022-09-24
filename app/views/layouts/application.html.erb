@@ -11,6 +11,35 @@
   </head>
 
   <body>
-    <%= yield %>
+  <nav class="navbar bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="<%= image_path 'logo' %>" alt="Bootstrap" width="50" height="auto">
+      </a>
+    </div>
+  </nav>
+  <div class='container-fluid px-1'>  
+    <div class="row">
+      <div class="col-sm-2">
+        <nav class="nav flex-column">
+          <a class="nav-link active" aria-current="page" href="#">Today</a>
+          <a class="nav-link" href="#">This Week</a>
+          <%= link_to 'Categories <i class="bi bi-plus-lg"></i>'.html_safe, '../categories/new', class: 'nav-link' %>
+
+          <ul class='list-group'>
+            <% @categories.each do |cat| %>
+              <li class='list-group-item'> <%= link_to cat.category_name, category_path(cat) %> </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="col-sm-10">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+
   </body>
 </html>
