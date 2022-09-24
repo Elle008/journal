@@ -18,14 +18,11 @@ class CategoriesController < ApplicationController
     @categories = Category.all
     @category = Category.new(category_params)
 
-
-      if @category.save
-        redirect_to category_url(@category), notice: "Category was successfully created." 
-
-      else
-        render :new, status: :unprocessable_entity 
-
-      end
+    if @category.save
+      redirect_to category_url(@category), notice: "Category was successfully created." 
+    else
+      render :new, status: :unprocessable_entity 
+    end
   end
 
   def edit
@@ -36,9 +33,9 @@ class CategoriesController < ApplicationController
 
   def update
     @category = Category.find(params[:id])
+
     if @category.update(category_params)
       redirect_to category_url(@category), notice: "Category was successfully updated."
-
     else
       render :edit
     end
@@ -52,8 +49,8 @@ class CategoriesController < ApplicationController
 
   private
 
-    def category_params
-      params.require(:category).permit(:category_name, :category_description)
-    end
+  def category_params
+    params.require(:category).permit(:category_name)
+  end
 
 end

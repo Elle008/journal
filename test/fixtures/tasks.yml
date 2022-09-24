@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task: MyText
+  date: 2022-09-24
+  time: 2022-09-24 10:38:56
+  status_completed: false
+  cat_id: 1
+
+two:
+  task: MyText
+  date: 2022-09-24
+  time: 2022-09-24 10:38:56
+  status_completed: false
+  cat_id: 1
