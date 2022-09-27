@@ -1,33 +1,31 @@
-<div class="container">
-      <div>
-      <p class="my-5">
-        <strong class="">Task Description:</strong>
-        <%= @task.task %>
-      </p>
 
-      <p class="my-5">
-        <strong class="">Date:</strong>
-        <% if @task.date %>
-          <%= @task.date.strftime("%m/%d/%Y") %>
-        <% end %>
-      </p>
+<div class='d-flex align-items-center justify-content-between py-4 mb-5 border-bottom border-light'>
+  <h5 class=''><%= @category.category_name %></h5>
+  <%= link_to 'Back to tasks', category_path(@category), class: "btn btn-link me-5" %>
+</div>
 
-      <p class="my-5">
-      <strong class="">Time:</strong>
-      <% if @task.time %>
-        <%= @task.time.strftime("%I:%M%p") %>
-      <% end %>
-    </p>
-
-      <p class="my-5">
-      <strong class="">Category id:</strong>
-      <%= @task.category_id %>
-    </p>
-
-    <%= link_to 'Edit this task', edit_task_path(@task), class: "btn btn-primary" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this task', task_path(@task), method: :delete, class: "btn btn-secondary" %>
-    </div>
-    <%= link_to 'Back to tasks', tasks_path, class: "btn btn-link" %>
+<div class='d-flex align-items-center justify-content-between'>
+  <div class='d-flex align-items-center'>
+    <p class='fs-3 mb-0 me-5'><%= @task.task %></p>
+    <%= link_to '<i class="bi bi-pencil-fill"></i>'.html_safe, edit_category_task_path(@category, @task), class: "mx-2" %>
+    <%= link_to '<i class="bi bi-trash3-fill"></i>'.html_safe, [@category, @task], method: :delete, class: 'mx-2' %>
+  </div>
+  
+  <div class='d-flex me-5'>
+    <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+    <label class="btn btn-primary " for="btn-check"><%= @task.status_completed ? 'Mark as incomplete' : 'Mark Completed' %></label>
   </div>
 </div>
+</br>
+
+<% if @task.date %>
+  <div class='d-flex align-items-center'>
+    <i class="bi bi-calendar-check text-primary fs-5 me-3"></i>    
+    <p class='fs-5 me-3 mb-0'><%= @task.date.strftime("%m/%d/%Y") %></p> 
+    <i class="bi bi-alarm text-primary fs-5 me-3"></i>
+    <p class='fs-5 me-3 mb-0'><%= @task.time.strftime("%I:%M%p") %></p>
+  </div>
+<% end %>
+
+
+

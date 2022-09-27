@@ -1,30 +1,27 @@
+<div class='container d-flex justify-content-between align-items-center py-4 mb-5 border-bottom border-light'>
+  <div class='d-flex'>
+    <h5 class='me-5'><%= @category.category_name %></h5>
+    <%= link_to '<i class="bi bi-pencil-fill"></i>'.html_safe, edit_category_path(@category), class: "mx-2" %>
+    <%= link_to '<i class="bi bi-trash3-fill"></i>'.html_safe, category_path(@category), data: { turbo_method: :delete }, class: 'mx-2' %>
+  </div>
 
-<%= link_to 'Add task', new_task_path, class: "btn btn-primary" %>
+  <%= link_to 'Add task <i class="bi bi-plus-lg "></i>'.html_safe, new_category_task_path(@category), class: "btn btn-primary" %>
+  
+</div>
+
 
 <div class="container">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Category name:</strong>
-    <%= @category.category_name %>
-    id# <%= @category.id %>
-  </p>
+
 
   <% if @category.tasks %>
-  <ul class="my-5">
-    <strong class="block font-medium mb-1">Tasks:</strong>
-
+  <ul class="my-5 list-group">
     <% @category.tasks.each do |task| %>
-     <li><%= link_to task.task, task_path(task) %></li>
+     <li class='list-group-item'>
+      <input type="checkbox" id= <%=task.id%> name= <%=task.id%> value= <%=task.id%> class='form-check-input me-3'>
+      <label for=task.id> <%= link_to task.task, category_task_path(@category, task), class: 'text-decoration-none text-dark' %></label><br>
+     </li>
     <% end %>
   </ul>
   <% end %>
 
-</div>
-
-    <%= link_to 'Edit this category', edit_category_path(@category), class: "btn btn-primary" %>
-    </br>
-    </br>
-    <%= button_to 'Destroy this category', category_path(@category), method: :delete, class: "btn btn-secondary" %>
-  </div>
-    
-  
 </div>

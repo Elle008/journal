@@ -1,4 +1,4 @@
-<%= form_with(model: task, class: "") do |form| %>
+<%= form_with(model: [@category, task]) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
@@ -13,24 +13,24 @@
 
   <div class="mb-3">
     <%= form.label :task, class:'form-label' %>
-    <%= form.text_field :task, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </br>
+    <%= form.text_field :task, class: "rounded border border-secondary px-3 py-2 mt-2 w-50" %>
+  </div>
+        
+  <%= form.label 'Add a reminder for this task', class:'form-label mb-3' %>
+  <div class="mb-3 input-group w-50">
+    <%= form.date_field :date, class: "form-control border-secondary " %>
+    <%= form.time_field :time, class: "form-control border-secondary " %>
   </div>
 
   <div class="mb-3">
-    <%= form.label 'Add a reminder date for this task', class:'form-label' %>
-    <%= form.date_field :date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label'Add a reminder time for this task', class:'form-label' %>
-    <%= form.time_field :time, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label 'Select category for this task', class:'form-label' %>
-    <%= form.number_field :category_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.number_field :category_id, value: @category.id, type: :hidden, class: "rounded border border-secondary px-3 py-2 mt-2" %>
   </div>
   </br>
-  <%= form.submit class: "btn btn-primary" %>
 
+  <div d-flex>
+    <%= form.submit class: "btn btn-primary me-3" %>
+    <%= link_to 'Back to Tasks', category_path(@category), class: "btn btn-outline-primary" %>
+  </div>
+  
 <% end %>

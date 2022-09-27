@@ -1,4 +1,12 @@
 class TasksController < ApplicationController
+
+  before_action :authenticate_user!
+  before_action :set_category
+
+  def index
+    @categories = Category.all
+  end
+
   def show
     @categories = Category.all
     @task = Task.find(params[:id])
@@ -6,14 +14,14 @@ class TasksController < ApplicationController
 
   def new
     @categories = Category.all
-    @task = Task.new
+    @task = @category.tasks.build
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = @category.tasks.build(task_params)
 
     if @task.save
-      redirect_to task_url(@task), notice: "Task was successfully created." 
+      redirect_to [@category, @task], notice: "Task was successfully created." 
     else
       render :new
     end
@@ -28,7 +36,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
 
     if @task.update(task_params)
-      redirect_to task_url(@task), notice: "Task was successfully updated."
+      redirect_to [@category, @task], notice: "Task was successfully updated."
     else
       render :edit
     end
@@ -41,6 +49,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def set_category 
+    @category = Category.find(params[:category_id])
+  end
 
   def task_params
     params.require(:task).permit(:task, :date, :time, :status_completed, :category_id)
