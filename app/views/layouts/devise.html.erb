@@ -10,11 +10,20 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body class='d-flex justify-content-center align-items-center position-relative vh-100'>
-    <div class='w-max'>
+  <body class='d-flex justify-content-center align-items-center position-relative vh-100 vw-100'>
+    
+    <div class='bg-light h-100 w-50 d-flex flex-column justify-content-center align-items-center p-3'>
       <img src="<%= image_path 'journal_logo' %>" width="180" height="auto">
+      <p class='fst-italic fw-light'>
+        "Journaling is like whispering to one's self
+        </br>
+        and listening at the same time" ~ Mina Murray
+      </p>
+    </div>
+    <div class='w-50 h-100 d-flex flex-column justify-content-center align-items-center'>
       <%= yield %>
     </div>
+    
 
     <% if notice.present? %>
       <div class='position-absolute py-2 px-3 bottom-0 end-0 m-3 btn btn-secondary' id="notice">

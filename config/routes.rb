@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :tasks
   end
   
-  root "categories#index"
+  get 'tasks', to: 'tasks#index'
+  
+  root "tasks#index"
 
 end

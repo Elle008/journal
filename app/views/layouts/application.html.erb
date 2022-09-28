@@ -31,7 +31,7 @@
       <div class="row">
         <div class="col-sm-2">
           <nav class="nav flex-column mt-4">
-            <a class="nav-link active text-dark" aria-current="page" href="#">Today</a>
+            <%= link_to 'Today', tasks_path, class: 'nav-link text-dark'%>
             <a class="nav-link text-dark" href="#">This Week</a>
             <%= link_to 'Categories <i class="bi bi-plus-lg "></i>'.html_safe, new_category_path, class: 'nav-link text-primary'%>
 

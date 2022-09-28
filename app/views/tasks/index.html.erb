@@ -1,0 +1,14 @@
+<h5 class='py-4 mb-4 border-bottom border-light'>Today, <%= Date.today.strftime("%B %e, %Y") %></h5>
+
+<% @tasks.each do |task| %>
+<ul class="my-5 list-group">
+  <li class='list-group-item'>
+    <input type="checkbox" id= <%=task.id%> name= <%=task.id%> value= <%=task.id%> class='form-check-input me-3'>
+    <label for=<%=task.id%>><%= link_to task.task, category_task_path(task.category_id, task), class: 'text-decoration-none text-dark'%>
+ 
+        <i class="bi bi-alarm text-primary ms-3">  <%= task.time.strftime("%I:%M%p") %></i>
+
+    </label>
+  </li>
+</ul>
+<% end %>

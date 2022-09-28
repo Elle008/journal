@@ -2,24 +2,17 @@ class CategoriesController < ApplicationController
 
   before_action :authenticate_user!
   
-  def index
-    @categories = Category.all
-  end
 
   def show
-    @categories = Category.all
     @category = Category.find(params[:id])
   end
 
   def new
-    @categories = Category.all
-    @category = Category.new
+    @category = current_user.categories.build
   end
 
   def create
-    @categories = Category.all
-    @category = Category.new(category_params)
-    
+    @category = current_user.categories.build(category_params)
 
     if @category.save
       redirect_to category_url(@category), notice: "Category was successfully created." 
@@ -47,7 +40,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    redirect_to categories_url, notice: "Category was successfully destroyed."
+    redirect_to tasks_url, notice: "Category was successfully destroyed."
   end
 
   private

@@ -1,19 +1,17 @@
 class TasksController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_category
+  before_action :set_category, except: :index
 
   def index
-    @categories = Category.all
+    @tasks = current_user.tasks.all.where(date: Date.today)
   end
 
   def show
-    @categories = Category.all
     @task = Task.find(params[:id])
   end
 
   def new
-    @categories = Category.all
     @task = @category.tasks.build
   end
 
@@ -28,7 +26,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @categories = Category.all
     @task = Task.find(params[:id])
   end
 
@@ -45,7 +42,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to categories_url, notice: "Task was successfully destroyed."
+    redirect_to category_path(@category), notice: "Task was successfully destroyed."
   end
 
   private
@@ -55,7 +52,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:task, :date, :time, :status_completed, :category_id)
+    params.require(:task).permit(:task, :date, :time, :status_completed, :category_id, :user_id)
   end
 
 end
