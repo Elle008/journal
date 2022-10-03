@@ -2,12 +2,18 @@
 
 <% @tasks.each do |task| %>
 <ul class="my-5 list-group">
-  <li class='list-group-item'>
-    <input type="checkbox" id= <%=task.id%> name= <%=task.id%> value= <%=task.id%> class='form-check-input me-3'>
-    <label for=<%=task.id%>><%= link_to task.task, category_task_path(task.category_id, task), class: 'text-decoration-none text-dark'%>
- 
+  <li class='list-group-item d-flex <%= 'bg-tertiary' if task.status_completed %>'>
+    <%= form_with(scope: :task, url: category_task_path(task.category_id, task), model: task) do |form| %>
+      <%= form.text_field :task, type: 'hidden' %>      
+      <%= form.date_field :date, type: 'hidden' %>
+      <%= form.time_field :time, type: 'hidden' %>
+      <%= form.number_field :category_id, type: 'hidden' %>
+      <%= form.number_field :user_id, type: 'hidden' %>  
+      <%= form.check_box :status_completed, onchange: 'this.form.submit();', class: "form-check-input", autocomplete: "off" %>
+      <%= form.submit class: "visually-hidden btn btn-primary me-3" %>
+    <% end %>
+    <label for=<%=task.id%>><%= link_to task.task, category_task_path(task.category_id, task), class: 'text-decoration-none text-dark ms-3'%>
         <i class="bi bi-alarm text-primary ms-3">  <%= task.time.strftime("%I:%M%p") %></i>
-
     </label>
   </li>
 </ul>

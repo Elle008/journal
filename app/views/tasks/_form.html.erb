@@ -24,11 +24,16 @@
   </div>
 
   <div class="mb-3">
-    <%= form.number_field :category_id, value: @category.id, class: "rounded border border-secondary px-3 py-2 mt-2" %>
+    <%= form.number_field :category_id, value: @category.id, type: 'hidden', class: "rounded border border-secondary px-3 py-2 mt-2" %>
   </div>
 
   <div class="mb-3">
-    <%= form.number_field :user_id, value: current_user.id, class: "rounded border border-secondary px-3 py-2 mt-2" %>
+    <%= form.number_field :user_id, value: current_user.id, type: 'hidden', class: "rounded border border-secondary px-3 py-2 mt-2" %>
+  </div>
+
+  <div class="d-flex mb-3">
+    <%= form.check_box :status_completed, class: "form-check-input me-3" %>
+    <label class="form-check-label" for="flexCheckDefault">Completed</label>
   </div>
   </br>
 
