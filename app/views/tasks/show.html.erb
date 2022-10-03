@@ -6,7 +6,11 @@
 
 <div class='d-flex align-items-center justify-content-between'>
   <div class='d-flex align-items-center'>
-    <p class="fs-3 mb-0 me-5 <%= 'text-decoration-line-through' if @task.status_completed %>"><%= @task.task %></p>
+    <p class="fs-3 mb-0 me-5"><%= @task.task %>
+      <% if @task.status_completed %>
+      <span class="badge rounded-pill border border-primary ms-3 text-primary"> ✓ Completed</span>
+      <% end %>
+    </p>
     <%= link_to '<i class="bi bi-pencil-fill"></i>'.html_safe, edit_category_task_path(@category, @task), class: "mx-2" %>
     <%= link_to '<i class="bi bi-trash3-fill"></i>'.html_safe, [@category, @task], data: { turbo_method: :delete }, class: 'mx-2' %>
   </div>

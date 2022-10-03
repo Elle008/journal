@@ -12,7 +12,7 @@
 <% if @category.tasks %>
   <% @category.tasks.each do |task| %>
     <ul class="my-5 list-group">
-      <li class='list-group-item d-flex <%= 'bg-tertiary' if task.status_completed %>'>
+      <li class='list-group-item d-flex justify-content-between <%= 'bg-tertiary' if task.status_completed %>'>
       <%= form_with(model: [@category, task]) do |form| %>
         <%= form.text_field :task, type: 'hidden' %>      
         <%= form.date_field :date, type: 'hidden' %>
@@ -21,12 +21,14 @@
         <%= form.number_field :user_id, type: 'hidden' %>  
         <%= form.check_box :status_completed, onchange: 'this.form.submit();', class: "form-check-input", autocomplete: "off" %>
         <%= form.submit class: "visually-hidden btn btn-primary me-3" %>
+        <%= link_to task.task, category_task_path(@category, task), class: 'text-decoration-none text-dark m-3'%>
+        <% if task.date %>
+          <i class="bi bi-alarm text-primary ms-3">  <%= task.date.strftime("%m/%d/%Y") %>  <%= task.time.strftime("%I:%M%p") %></i>
+        <% end %>
       <% end %>
-        <label for=<%=task.id%>><%= link_to task.task, category_task_path(@category, task), class: 'text-decoration-none text-dark m-3'%>
-          <% if task.date %>
-            <i class="bi bi-alarm text-primary ms-3">  <%= task.date.strftime("%m/%d/%Y") %>  <%= task.time.strftime("%I:%M%p") %></i>
-          <% end %>
-        </label>
+      <% if task.status_completed %>
+        <span class="badge rounded-pill border border-primary ms-3 text-primary justify-self-end"> ✓ Completed</span>
+      <% end %>
       </li>
     </ul>
   <% end %>
